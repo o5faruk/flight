@@ -19,6 +19,16 @@ Flight::route('GET /cars', function(){
     Flight::json($cars);
 });
 
+Flight::route('GET /cars/@id', function($id){
+    
+    $get = "SELECT * FROM cars WHERE id = {$id}";
+    
+    $stmt = Flight::db()->prepare($get);
+    $stmt->execute();
+    $car = $stmt->fetch(PDO::FETCH_ASSOC);
+    Flight::json($car);
+});
+
 Flight::route('POST /cars', function(){
     $request = Flight::request()->data->getData();
     // return name;
