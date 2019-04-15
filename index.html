@@ -9,11 +9,97 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
   </head>
   <body>
+    <div
+      class="modal fade"
+      id="addCarModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="addCarModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addCarModalLabel">Add new car</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="createCarForm" action="#">
+              <div class="form-group">
+                <label for="carName">Name</label>
+                <input
+                  required
+                  minlength="2"
+                  class="form-control"
+                  type="text"
+                  name="name"
+                  id="carName"
+                  placeholder="Dacia"
+                />
+              </div>
+              <div class="form-group">
+                <label for="carModel">Model</label>
+                <input
+                  required
+                  minlength="2"
+                  class="form-control"
+                  type="text"
+                  name="model"
+                  id="carModel"
+                  placeholder="Sandero"
+                />
+              </div>
+              <div class="form-group">
+                <label for="carYear">Year</label>
+                <input
+                  required
+                  min="1900"
+                  max="2019"
+                  class="form-control"
+                  type="number"
+                  name="year"
+                  id="carYear"
+                  placeholder="2018"
+                />
+              </div>
+              <div class="form-group">
+                <label for="carPower">Power</label>
+                <input
+                  required
+                  class="form-control"
+                  type="number"
+                  name="power"
+                  id="carPower"
+                  min="30"
+                  max="600"
+                  placeholder="180"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <h1>Cars</h1>
       <div class="row">
         <div class="col-2">
-          <button class="btn btn-success">Add New</button>
+          <button
+            class="btn btn-success"
+            type="button"
+            data-toggle="modal"
+            data-target="#addCarModal"
+          >
+            Add New
+          </button>
         </div>
       </div>
       <div class="row mt-3">
@@ -32,17 +118,28 @@
             <tbody></tbody>
           </table>
           <div class="d-flex justify-content-between">
-            <button class="btn btn-primary">Prev</button>
+            <button class="btn btn-primary" onclick="addPage(-1)">Prev</button>
             <div class="form-group m-0">
               <label for="pageSizeInput">Page Size</label>
               <input
+                onchange="getCars()"
                 type="number"
                 name="pagesize"
                 id="pageSizeInput"
                 value="20"
               />
             </div>
-            <button class="btn btn-primary">Next</button>
+            <div class="form-group m-0">
+              <label for="pageSizeInput">Page Number</label>
+              <input
+                onchange="getCars()"
+                type="number"
+                name="pageNumber"
+                id="pageNumberInput"
+                value="1"
+              />
+            </div>
+            <button class="btn btn-primary" onclick="addPage(1);">Next</button>
           </div>
         </div>
       </div>
@@ -51,6 +148,9 @@
     <!-- Bootstrap core JavaScript-->
     <script src="assets/jquery/jquery-3.1.1.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Validation -->
+    <script src="assets/jquery/jquery.validate.min.js"></script>
 
     <script src="js/index.js"></script>
   </body>
